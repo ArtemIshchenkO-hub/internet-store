@@ -19,3 +19,10 @@ export async function fetchProducts(currentPage) {
   });
   return data;
 }
+// Task 3
+export async function fetchProductsByCategory(currentCategory) {
+  const { data } = await axios.get(
+    `${ENDPOINTS.productsByCategory}/${currentCategory}`
+  );
+  return data;
+}
