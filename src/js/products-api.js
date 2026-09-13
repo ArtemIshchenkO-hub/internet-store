@@ -26,3 +26,22 @@ export async function fetchProductsByCategory(currentCategory) {
   );
   return data;
 }
+
+//Task 4
+
+export async function fetchProductById(id) {
+  const { data } = await axios.get(`${ENDPOINTS.products}/${id}`);
+  return data;
+}
+
+//Task 5
+
+export async function fetchProductByName(productName) {
+  const { data } = await axios.get(ENDPOINTS.searchProduct, {
+    params: {
+      q: productName,
+    },
+  });
+
+  return data;
+}

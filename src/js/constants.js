@@ -3,7 +3,8 @@ export const BASE_URL = 'https://dummyjson.com';
 export const ENDPOINTS = {
   categories: '/products/category-list',
   products: '/products',
-  productsByCategory:'/products/category',
+  productsByCategory: '/products/category',
+  searchProduct: '/products/search',
 };
 
 export const PRODUCTS_PER_PAGE = 12;
