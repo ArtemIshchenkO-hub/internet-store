@@ -1,6 +1,15 @@
-import { addActiveClass } from './helpers';
-import { fetchCategories, fetchProducts } from './products-api';
-import { renderCategories, renderProducts } from './render-function';
+import { addActiveClass, togle } from './helpers';
+import {
+  fetchCategories,
+  fetchProducts,
+  fetchProductsByCategory,
+} from './products-api';
+import { refs } from './refs';
+import {
+  clearProducts,
+  renderCategories,
+  renderProducts,
+} from './render-function';
 
 export async function getCategories() {
   try {
@@ -26,5 +35,21 @@ export async function handleCategoryClick(event) {
     return;
   }
   const category = event.target.textContent;
-  console.log(category);
+  togle(event.target);
+  try {
+    let products = null;
+    clearProducts();
+    if (category === 'All') {
+      products = await fetchProducts(1);
+    } else {
+      products = await fetchProductsByCategory(category);
+    }
+    if (products.products.length === 0) {
+      refs.notFound.classList.add('not-found--visible');
+      return;
+    }
+    renderProducts(products.products);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
